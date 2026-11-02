@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>ADAH – Your future starts with the right opportunity</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#fbf8f2;--sf:#fff;--tx:#1d2a24;--mu:#5d6b64;--br:#e3ddd0;--pr:#0f6b4b;--pt:#fff;--ac:#e8a317;--rd:#b3261e;--rb:#fbe9e7;--gb:#e3f4ea;--box-sizing:border-box;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a16;--sf:#1b2621;--tx:#eef3ef;--mu:#9fb0a7;--br:#2c3a33;--pr:#3fbf8a;--pt:#0b1510;--ac:#f0b73a;--rd:#ff8a80;--rb:#3a1f1c;--gb:#17382a;color-scheme:dark}}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:70px}*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Georgia,'Times New Roman',serif}
+h1,h2,h3,button,input,select,textarea,nav,.tag{font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--br);display:flex;align-items:center;gap:16px;padding:10px 20px;flex-wrap:wrap}
+.logo{font:800 26px system-ui;letter-spacing:3px;color:var(--pr);text-decoration:none}
+nav{display:flex;gap:14px;flex:1;flex-wrap:wrap;font-size:14px}nav a{color:var(--tx);text-decoration:none}nav a:hover{color:var(--pr)}
+button{cursor:pointer;border:1px solid var(--pr);background:var(--pr);color:var(--pt);padding:8px 16px;border-radius:8px;font-size:14px;font-weight:600}
+button.ghost{background:transparent;color:var(--pr)}
+.hero{padding:64px 20px 48px;text-align:center;background:linear-gradient(160deg,var(--gb),var(--bg))}
+.hero h1{font-size:clamp(32px,6vw,56px);line-height:1.1;margin:0 auto 14px;max-width:800px}
+.hero p{max-width:640px;margin:0 auto 22px;color:var(--mu)}
+.search{display:flex;gap:8px;max-width:560px;margin:auto}.search input{flex:1}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--br);border-radius:8px;background:var(--sf);color:var(--tx);font-size:15px}
+section{max-width:1060px;margin:auto;padding:36px 20px}
+h2{font-size:26px;margin:0 0 6px}.sub{color:var(--mu);margin:0 0 18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{background:var(--sf);color:var(--tx);border-color:var(--br);font-weight:500}.tabs button.on{background:var(--pr);color:var(--pt);border-color:var(--pr)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:var(--sf);border:1px solid var(--br);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.card h3{margin:0;font-size:17px}.meta{font-size:13px;color:var(--mu)}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--gb);color:var(--pr);font-weight:700;margin-right:4px}
+.tag.c{background:var(--rb);color:var(--rd)}.tag.n{background:#fff3d1;color:#7a5600}
+.card.closed{opacity:.6}.card a.ap{margin-top:auto;font:600 14px system-ui;color:var(--pr)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.box{background:var(--sf);border:1px solid var(--br);border-radius:12px;padding:18px}
+label{display:block;font:600 13px system-ui;margin:10px 0 4px}
+dialog{border:1px solid var(--br);border-radius:14px;background:var(--bg);color:var(--tx);max-width:440px;width:92%;padding:20px}
+dialog::backdrop{background:#0008}
+.res{margin-top:12px;padding:12px;border-radius:8px;font-size:14px;display:none}
+.res.bad{display:block;background:var(--rb);color:var(--rd)}.res.ok{display:block;background:var(--gb);color:var(--pr)}
+footer{text-align:center;padding:30px 20px;color:var(--mu);font-size:13px;border-top:1px solid var(--br)}
+</style></head><body>
+<header><a class="logo" href="#top">ADAH</a>
+<nav><a href="#opps">Opportunities</a><a href="#services">Services</a><a href="#scam">Scam checker</a><a href="#alerts">Alerts</a><a href="#verify">How we verify</a></nav>
+<button class="ghost" id="acct">Sign in / Join</button></header>
+
+<div class="hero" id="top"><h1>Your future starts with the right opportunity</h1>
+<p>Scholarships, internships, attachments and more for Kenyan students and graduates, collected, verified and organised in one place, so you don’t have to search a dozen websites.</p>
+<div class="search"><input id="q" placeholder="Search e.g. engineering, nursing, Kenya…"><button onclick="go()">Search</button></div></div>
+
+<section id="opps"><h2>Browse opportunities</h2><p class="sub">Every listing shows its original source, publication date, deadline, eligibility and application link. Expired listings are marked closed.</p>
+<div class="tabs" id="tabs"></div><div class="grid" id="list"></div></section>
+
+<section id="services"><h2>Optional services</h2><p class="sub">Extra help when you want it. Always optional, always clearly priced before you commit.</p>
+<div class="two" id="svc"></div></section>
+
+<section id="scam"><h2>Scam checker</h2><p class="sub">Paste an opportunity’s text, or the email or link it came from. We look for common red flags.</p>
+<div class="box"><textarea id="st" rows="5" placeholder="Paste the advert, message or email here…"></textarea>
+<div style="margin-top:10px"><button onclick="scan()">Check for scam signs</button></div><div class="res" id="sr"></div></div></section>
+
+<section id="alerts"><h2>Personalised alerts</h2><p class="sub">Tell us what you want and we’ll flag matching new listings when you sign in.</p>
+<div class="box"><div class="two"><div><label>Categories</label><select id="ac" multiple size="6"></select></div>
+<div><label>Level of study</label><select id="al"><option>Any</option><option>TVET / Certificate</option><option>Diploma</option><option>Undergraduate</option><option>Postgraduate</option><option>Graduate</option></select>
+<label>Field (optional)</label><input id="af" placeholder="e.g. nursing, ICT, agriculture"><br><br><button onclick="saveAlert()">Save my alert</button></div></div>
+<div class="res ok" id="am"></div></div></section>
+
+<section id="verify"><h2>How we publish</h2><div class="two">
+<div class="box"><h3>1. Collect</h3>We gather opportunities from official provider sites, government portals and trusted partners.</div>
+<div class="box"><h3>2. Verify</h3>Nothing goes live until our team confirms the details directly with the provider.</div>
+<div class="box"><h3>3. Record</h3>Source, publication date, deadline, eligibility and application link are stored for each listing.</div>
+<div class="box"><h3>4. Close</h3>Listings past their deadline are automatically marked closed.</div></div>
+<div class="box" style="margin-top:14px"><h3 style="margin-top:0">For organisations</h3>Run a scholarship, internship or attachment programme? Create an organisation account and submit it for verification. <br><br><button onclick="openAcct('org')">Create organisation account</button></div></section>
+
+<footer>© 2026 ADAH · Sample listings shown for demonstration, replace with verified provider data before launch.<br>ADAH never charges to apply for an opportunity.</footer>
+
+<dialog id="dlg"><div id="dbody"></div></dialog>
+
+<script>
+var TODAY=new Date("2026-11-02");
+var CATS=["Scholarships","Internships","Industrial attachments","International opportunities","Government opportunities","Latest opportunities"];
+var L=[
+{c:"Scholarships",t:"Undergraduate Merit Scholarship (Sample)",p:"Example University Foundation",s:"foundation.example.org",pub:"2026-10-20",dl:"2026-12-15",e:"Kenyan citizen, KCSE mean grade B+ or above, financial need.",lvl:"Undergraduate"},
+{c:"Scholarships",t:"Postgraduate STEM Fellowship (Sample)",p:"Example Research Trust",s:"trust.example.org",pub:"2026-09-01",dl:"2026-10-15",e:"Bachelor’s degree, first class or upper second, admitted to a Master’s programme.",lvl:"Postgraduate"},
+{c:"Internships",t:"Graduate Finance Internship (Sample)",p:"Example Bank Kenya",s:"careers.examplebank.example",pub:"2026-10-28",dl:"2026-11-30",e:"Graduated within the last 2 years, degree in finance, economics or related field.",lvl:"Graduate"},
+{c:"Internships",t:"Software Engineering Intern (Sample)",p:"Example Tech Ltd, Nairobi",s:"exampletech.example",pub:"2026-10-30",dl:"2026-11-20",e:"Final-year or recent ICT graduate; basic JavaScript or Python.",lvl:"Undergraduate"},
+{c:"Industrial attachments",t:"Nursing Clinical Attachment (Sample)",p:"Example County Hospital",s:"health.example.go.ke",pub:"2026-10-10",dl:"2026-11-25",e:"KMTC or university nursing student with attachment letter from institution.",lvl:"Diploma"},
+{c:"Industrial attachments",t:"Mechanical Engineering Attachment (Sample)",p:"Example Manufacturing Co.",s:"manufacturing.example",pub:"2026-09-05",dl:"2026-10-01",e:"TVET, polytechnic or university engineering students, 8–12 week placement.",lvl:"TVET / Certificate"},
+{c:"International opportunities",t:"Master’s Scholarship Abroad (Sample)",p:"Example International Scholarship Board",s:"scholarships.example.int",pub:"2026-10-25",dl:"2027-01-31",e:"Citizen of an eligible African country, 2 years’ work experience, English proficiency.",lvl:"Postgraduate"},
+{c:"International opportunities",t:"Overseas Summer Internship (Sample)",p:"Example Global NGO",s:"ngo.example.int",pub:"2026-10-31",dl:"2026-12-10",e:"University students aged 18–28, strong English.",lvl:"Undergraduate"},
+{c:"Government opportunities",t:"Public Service Internship Programme (Sample)",p:"Example State Department",s:"ministry.example.go.ke",pub:"2026-10-22",dl:"2026-11-18",e:"Kenyan graduates aged 18–35, not previously employed in public service.",lvl:"Graduate"},
+{c:"Government opportunities",t:"TVET Bursary Programme (Sample)",p:"Example Government Agency",s:"agency.example.go.ke",pub:"2026-10-29",dl:"2026-12-05",e:"Kenyan TVET trainees demonstrating need; apply via institution.",lvl:"TVET / Certificate"}];
+var SV=[["CV formatting","Clean, ATS-friendly CV tailored to Kenyan and international employers."],["Cover letter preparation","A focused cover letter written for the specific opportunity."],["Application document review","We check essays, personal statements and forms before you submit."],["Interview preparation","Practice questions, feedback and tips for panel and video interviews."]];
+var cur=CATS[0],ST={};
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function closed(x){return new Date(x.dl+"T23:59:59")<TODAY}
+function fmt(d){return new Date(d).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}
+function isNew(x){return !closed(x)&&(TODAY-new Date(x.pub))/864e5<=14}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function items(){
+ var q=document.getElementById("q").value.toLowerCase();
+ var r=L.filter(function(x){return cur=="Latest opportunities"?isNew(x):x.c==cur});
+ if(q)r=r.filter(function(x){return (x.t+x.p+x.e).toLowerCase().indexOf(q)>-1});
+ if(cur=="Latest opportunities")r.sort(function(a,b){return new Date(b.pub)-new Date(a.pub)});
+ return r}
+function render(){
+ document.getElementById("tabs").innerHTML=CATS.map(function(c){return '<button class="'+(c==cur?"on":"")+'" onclick="cur=\''+c+'\';render()">'+c+'</button>'}).join("");
+ var r=items();
+ document.getElementById("list").innerHTML=r.length?r.map(function(x){var cl=closed(x);
+ return '<div class="card'+(cl?" closed":"")+'"><div>'+(cl?'<span class="tag c">CLOSED</span>':'<span class="tag">OPEN</span>')+'<span class="tag">✓ Verified with provider</span>'+(isNew(x)?'<span class="tag n">NEW</span>':'')+'</div><h3>'+esc(x.t)+'</h3><div class="meta">'+esc(x.p)+'</div>'+
+ '<div class="meta"><b>Eligibility:</b> '+esc(x.e)+'</div><div class="meta"><b>Source:</b> '+esc(x.s)+'<br><b>Published:</b> '+fmt(x.pub)+' · <b>Deadline:</b> '+fmt(x.dl)+'</div>'+
+ (cl?'<span class="meta">Applications closed</span>':'<a class="ap" href="https://'+esc(x.s)+'" target="_blank" rel="noopener noreferrer">Apply on provider’s site →</a>')+'</div>'}).join(""):'<p class="sub">No listings found here right now.</p>'}
+function go(){cur=CATS[0];var q=document.getElementById("q").value;if(q){var m=L.filter(function(x){return (x.t+x.p+x.e).toLowerCase().indexOf(q.toLowerCase())>-1});if(m.length)cur=m[0].c}render();location.hash="opps"}
+document.getElementById("svc").innerHTML=SV.map(function(s,i){return '<div class="box"><h3 style="margin-top:0">'+s[0]+'</h3><p class="meta">'+s[1]+'</p><button class="ghost" onclick="req('+i+')">Request this service</button></div>'}).join("");
+document.getElementById("ac").innerHTML=CATS.slice(0,5).map(function(c){return '<option>'+c+'</option>'}).join("");
+function req(i){var u=load("adah_user",null);if(!u){openAcct("student");return}
+ modal('<h3>'+SV[i][0]+'</h3><p>Request received for <b>'+esc(u.name)+'</b>. Our team will contact you at '+esc(u.email)+' with a clear quote before any work begins.</p><button onclick="dlg.close()">Close</button>')}
+function modal(h){dbody.innerHTML=h;if(!dlg.open)dlg.showModal()}
+function openAcct(t){var u=load("adah_user",null);
+ if(u){var pend=load("adah_pending",[]);modal('<h3>Hello, '+esc(u.name)+'</h3><p class="meta">'+(u.type=="org"?"Organisation account":"Student / graduate account")+' · '+esc(u.email)+'</p>'+
+ (u.type=="org"?'<label>Submit an opportunity for verification</label><input id="ot" placeholder="Title"><input id="ol" placeholder="Application link" style="margin-top:6px"><input id="od" type="date" style="margin-top:6px"><textarea id="oe" rows="2" placeholder="Eligibility requirements" style="margin-top:6px"></textarea><br><br><button onclick="sub()">Submit for verification</button><p class="meta">Pending: '+pend.length+' (published only after our team confirms details with you)</p>':'')+
+ '<br><button class="ghost" onclick="out()">Sign out</button> <button onclick="dlg.close()">Close</button>');return}
+ modal('<h3>Join ADAH</h3><label>Account type</label><select id="ty"><option value="student">Student / graduate</option><option value="org">Organisation</option></select><label>Name</label><input id="nm"><label>Email</label><input id="em" type="email"><br><br><button onclick="join()">Create account</button> <button class="ghost" onclick="dlg.close()">Cancel</button><p class="meta">Demo: details are stored only in this browser.</p>');
+ if(t)document.getElementById("ty").value=t}
+function join(){var n=nm.value.trim(),e=em.value.trim();if(!n||e.indexOf("@")<1){alert("Please enter your name and a valid email.");return}save("adah_user",{name:n,email:e,type:ty.value});dlg.close();acct.textContent="My account";showAlerts()}
+function out(){try{localStorage.removeItem("adah_user")}catch(e){}dlg.close();acct.textContent="Sign in / Join"}
+function sub(){if(!ot.value||!ol.value||!od.value){alert("Please fill in title, link and deadline.");return}var p=load("adah_pending",[]);p.push({t:ot.value});save("adah_pending",p);openAcct()}
+acct.onclick=function(){openAcct()};
+function saveAlert(){var cs=[].slice.call(ac.selectedOptions).map(function(o){return o.value});save("adah_alert",{cs:cs,l:al.value,f:af.value});if(!load("adah_user",null)){openAcct("student")}showAlerts()}
+function showAlerts(){var a=load("adah_alert",null);if(!a)return;
+ var m=L.filter(function(x){return !closed(x)&&(!a.cs.length||a.cs.indexOf(x.c)>-1)&&(a.l=="Any"||x.lvl==a.l)&&(!a.f||(x.t+x.e).toLowerCase().indexOf(a.f.toLowerCase())>-1)});
+ am.style.display="block";am.innerHTML='Alert saved. <b>'+m.length+'</b> open listing(s) match now: '+(m.map(function(x){return esc(x.t)}).join("; ")||"none yet, we’ll tell you when one appears.")}
+var FLAGS=[[/(registration|processing|application|admin(istration)?|visa|clearance)\s*(fee|payment)|pay\s+(a\s+)?(fee|ksh|kes)|send\s+(money|ksh|kes)|deposit/i,"Asks for a fee or payment, genuine scholarships and internships do not charge to apply."],[/m-?pesa|till number|paybill|western union|bitcoin|crypto/i,"Mentions M-Pesa, paybill or other payment channels."],[/guarantee(d)?\s*(job|admission|scholarship|visa|placement)|100%\s*(success|guarantee)|no (interview|experience|qualification)/i,"Promises guaranteed results or removes normal requirements."],[/urgent|act now|today only|last chance|limited slots|hurry/i,"Uses pressure and urgency."],[/whatsapp|telegram|dm me|inbox me/i,"Pushes you to continue on WhatsApp or Telegram only."],[/@(gmail|yahoo|hotmail|outlook)\.com/i,"Uses a free email address instead of an official organisation domain."],[/bit\.ly|tinyurl|t\.co\/|wa\.me/i,"Contains a shortened or redirect link."],[/passport|bank (details|account)|id (number|copy)|pin|password/i,"Asks for sensitive documents or credentials too early."],[/congratulations.*(won|selected)|you (have been|were) selected/i,"Says you were selected for something you never applied for."]];
+function scan(){var t=st.value,h=FLAGS.filter(function(f){return f[0].test(t)});
+ if(!t.trim()){return}
+ sr.className="res "+(h.length?"bad":"ok");
+ sr.innerHTML=h.length?'<b>'+(h.length>=3?"High risk":"Warning")+': '+h.length+' red flag(s)</b><ul>'+h.map(function(f){return '<li>'+f[1]+'</li>'}).join("")+'</ul>Do not pay or share documents. Confirm directly with the organisation using contact details from its official website.':'<b>No common red flags found.</b> That does not guarantee it is genuine. Always confirm with the provider’s official website.'}
+if(load("adah_user",null))acct.textContent="My account";
+render();showAlerts();
+</script></body></html>
